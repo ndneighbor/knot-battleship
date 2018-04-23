@@ -1,5 +1,11 @@
 from tkinter import *
 from PIL import Image, ImageTk
+import BaseDialog as dialog
+import BaseEntry as entry
+import threading
+import socket
+import sys
+import logging
 
 
 class Window(Frame):
@@ -52,13 +58,20 @@ class Window(Frame):
         tB.place(relx=.5, rely=.8, anchor="c")
 
     def connectLobby(self):
-        load = Image.open("assets/kb-title.png")
-        render = ImageTk.PhotoImage(load)
+        t = Toplevel(self)
+        Label(t, text="Enter host:").grid(row=0, sticky="w")
+        Label(t, text="Enter port:").grid(row=1, sticky="w")
+        Label(t, text="Enter name:").grid(row=2, sticky="w")
 
-        # labels can be text or images
-        img = Label(self, image=render)
-        img.image = render
-        img.place(x=0, y=0)
+        self.hostEntryField = Entry(t)
+        self.portEntryField = Entry(t)
+        self.nameEntryField = Entry(t)
+
+        self.hostEntryField.grid(row=0, column=1)
+        self.portEntryField.grid(row=1, column=1)
+        self.nameEntryField.grid(row=2, column=1)
+
+        return self.hostEntryField
 
     def showHelp(self):
         t = Toplevel(self)
