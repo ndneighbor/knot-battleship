@@ -26,19 +26,30 @@ class Window(Frame):
 
         edit = Menu(menu)
         edit.add_command(label="Lobby Play", command=self.connectLobby)
+        edit.add_command(label="Quick Play", command=self.qCLobby)
         edit.add_command(label="Settings", command=self.settings)
         edit.add_command(label="Help", command=self.showHelp)
         menu.add_cascade(label="Menu", menu=edit)
 
-        # We are setting up the buttons and the visuals
+        # Header IMG
 
         load = Image.open("assets/kb-title.png")
         render = ImageTk.PhotoImage(load)
-
-        # labels can be text or images
         img = Label(self, image=render)
         img.image = render
         img.place(x=0, y=0)
+
+        # Buttons
+
+        lB = Button(self, text="Join a match", 
+                                command=self.connectLobby)
+        setB = Button(self, text="Settings", 
+                        command=self.settings)
+        tB = Button(self, text="Tutorial", 
+                        command=self.showHelp)
+        lB.place(relx=.5, rely=.6, anchor="c")
+        setB.place(relx=.5, rely=.7, anchor="c")
+        tB.place(relx=.5, rely=.8, anchor="c")
 
     def connectLobby(self):
         load = Image.open("assets/kb-title.png")
@@ -58,10 +69,22 @@ class Window(Frame):
         img.image = render
         img.place(x=0, y=0)
 
+    def qCLobby(self):
+        load = Image.open("assets/kb-title.png")
+        render = ImageTk.PhotoImage(load)
+
+        # labels can be text or images
+        img = Label(self, image=render)
+        img.image = render
+        img.place(x=0, y=0)
+
 
     def settings(self):
-        text = Label(self, text="Hey there good lookin!")
-        text.pack()
+        self.counter += 1
+        t = Toplevel(self)
+        t.wm_title("Window #%s" % self.counter)
+        l = Label(t, text="This is window #%s" % self.counter)
+        l.pack(side="top", fill="both", expand=True, padx=100, pady=100)
         
 
     def client_exit(self):
@@ -69,8 +92,9 @@ class Window(Frame):
 
 root = Tk()
 
-root.geometry("1204x1024")
+root.geometry("1029x768")
 
 app = Window(root)
 
 root.mainloop()  
+
