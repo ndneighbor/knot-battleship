@@ -13,3 +13,5 @@ TODO
 
 # for now, ignore autosaves
 saves/autosaves/*.json
+
+.vscode
