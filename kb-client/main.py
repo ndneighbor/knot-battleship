@@ -61,13 +61,10 @@ class Window(Frame):
         img.place(x=0, y=0)
 
     def showHelp(self):
-        load = Image.open("assets/kb-title.png")
-        render = ImageTk.PhotoImage(load)
-
-        # labels can be text or images
-        img = Label(self, image=render)
-        img.image = render
-        img.place(x=0, y=0)
+        t = Toplevel(self)
+        t.wm_title("Settings")
+        l = Label(t, text="This is the help.")
+        l.pack(side="top", fill="both", expand=True, padx=100, pady=100)
 
     def qCLobby(self):
         load = Image.open("assets/kb-title.png")
@@ -80,10 +77,9 @@ class Window(Frame):
 
 
     def settings(self):
-        self.counter += 1
         t = Toplevel(self)
-        t.wm_title("Window #%s" % self.counter)
-        l = Label(t, text="This is window #%s" % self.counter)
+        t.wm_title("Settings")
+        l = Label(t, text="Settings")
         l.pack(side="top", fill="both", expand=True, padx=100, pady=100)
         
 
